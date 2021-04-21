@@ -1,0 +1,102 @@
+import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
+import 'package:get/get.dart';
+
+class Detail extends StatelessWidget {
+  final data;
+  Detail({Key key, @required this.data}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: SingleChildScrollView(
+        child: SafeArea(
+          child: Column(
+            children: [
+              appBar(context),
+              Container(
+                padding: EdgeInsets.only(bottom: 32),
+                width: Get.width * 0.5,
+                child: Column(
+                  children: [
+                    data['description'] != ""
+                        ? _buildLayoutDescription(data['description'], 'สาเหตุ')
+                        : Container(),
+                    SizedBox(height: 16),
+                    data['method'] != ""
+                        ? _buildLayoutDescription(data['method'], 'วิธีแก้ไข')
+                        : _buildLayoutDescription('ไม่มีคำอธิบาย', '')
+                  ],
+                ),
+              )
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget appBar(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.all(16),
+      width: MediaQuery.of(context).size.width,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          MouseRegion(
+            cursor: SystemMouseCursors.click,
+            child: GestureDetector(
+              onTap: () => Navigator.pop(context),
+              child: Icon(Icons.arrow_back),
+            ),
+          ),
+          Container(
+            child: Column(
+              children: [
+                Text(
+                  data['name'],
+                  style: TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                      color: Color(0xFF2F2F3E)),
+                ),
+              ],
+            ),
+          ),
+          Container(),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildLayoutDescription(String value, String title) {
+    var resultValue = value;
+    return Column(
+      // mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          "$title",
+          style: TextStyle(
+              height: 1.5,
+              color: Colors.black,
+              fontSize: 18,
+              fontWeight: FontWeight.bold),
+        ),
+        Container(
+          width: Get.width * 0.4,
+          child: Text(
+            "$resultValue",
+            style: TextStyle(
+              height: 1.5,
+              color: Color(0xFF6F8398),
+              fontSize: 16,
+            ),
+            maxLines: null,
+            // softWrap: false,
+          ),
+        ),
+      ],
+    );
+  }
+}
