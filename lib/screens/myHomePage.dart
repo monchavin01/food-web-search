@@ -122,16 +122,14 @@ class _MyHomePageState extends State<MyHomePage> {
                         child: ListTile(
                           title: Row(
                             children: [
-                              data.data()['image'] != null
-                                  ? Container(
-                                      width: Get.width * 0.05,
-                                      height: Get.width * 0.05,
-                                      child: Image.network(
-                                        data.data()['image'],
-                                        fit: BoxFit.cover,
-                                      ),
-                                    )
-                                  : Container(),
+                              Container(
+                                width: Get.width * 0.05,
+                                height: Get.width * 0.05,
+                                child: Image.network(
+                                  data.data()['image'],
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
                               Padding(
                                 padding: const EdgeInsets.only(left: 16.0),
                                 child: Text(

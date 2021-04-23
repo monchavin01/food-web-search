@@ -27,12 +27,11 @@ class Detail extends StatelessWidget {
                               fit: BoxFit.cover,
                             ),
                           )
-                        : Container(
-                            height: Get.height * 0.2,
-                            width: Get.height * 0.2,
-                            child: Text(
-                              'ไม่มีรูปภาพ',
-                              style: TextStyle(fontSize: 36),
+                        : ClipRRect(
+                            borderRadius: BorderRadius.circular(100),
+                            child: Image.network(
+                              'http://teamtech24.com/foodhati/foodhatiAdmin/assets/img/foodimg/default-food-image.jpg',
+                              fit: BoxFit.cover,
                             ),
                           ),
                     SizedBox(height: 16),
@@ -43,7 +42,7 @@ class Detail extends StatelessWidget {
                     SizedBox(height: 16),
                     data['method'] != ""
                         ? _buildLayoutDescription(data['method'], 'วิธีการปรุง')
-                        : _buildLayoutDescription('ไม่มีคำอธิบาย', '')
+                        : Container()
                   ],
                 ),
               )
