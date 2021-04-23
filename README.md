@@ -14,9 +14,9 @@ A few resources to get you started if this is your first Flutter project:
 
 # After clone repository
 Run Command
-- flutter pub get
+> flutter pub get
 
 # Run Webrowser
 Run Comand
--flutter run -d chrome
+> flutter run -d chrome --no-sound-null-safety --web-renderer=html
 
