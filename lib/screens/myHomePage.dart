@@ -60,11 +60,12 @@ class _MyHomePageState extends State<MyHomePage> {
     return GestureDetector(
       onTap: () {},
       child: Container(
-        width: Get.width * 0.6,
+        width: Get.width * 0.4,
         child: Card(
           child: TextField(
             controller: _controller,
             decoration: InputDecoration(
+                fillColor: Colors.pink,
                 suffixIcon: Icon(Icons.search),
                 border: InputBorder.none,
                 contentPadding: EdgeInsets.all(16),
@@ -102,7 +103,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget _buildResultSearch() {
     return Container(
       height: Get.height * 0.6,
-      width: Get.width * 0.6,
+      width: Get.width * 0.4,
       child: StreamBuilder<QuerySnapshot>(
         stream: FirebaseFirestore.instance
             .collection("food")
@@ -119,11 +120,28 @@ class _MyHomePageState extends State<MyHomePage> {
                       color: Colors.white,
                       child: GestureDetector(
                         child: ListTile(
-                          title: Text(
-                            data.data()['name'],
-                            style: TextStyle(
-                              fontSize: 16,
-                            ),
+                          title: Row(
+                            children: [
+                              data.data()['image'] != null
+                                  ? Container(
+                                      width: Get.width * 0.05,
+                                      height: Get.width * 0.05,
+                                      child: Image.network(
+                                        data.data()['image'],
+                                        fit: BoxFit.cover,
+                                      ),
+                                    )
+                                  : Container(),
+                              Padding(
+                                padding: const EdgeInsets.only(left: 16.0),
+                                child: Text(
+                                  data.data()['name'],
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
                         ),
                         onTap: () {
@@ -181,7 +199,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget _buildTextLogo(String text, textColor) {
     return Text(
       text,
-      style: GoogleFonts.rubik().copyWith(
+      style: GoogleFonts.chivo().copyWith(
           fontSize: 64, color: textColor, fontWeight: FontWeight.bold),
     );
   }
