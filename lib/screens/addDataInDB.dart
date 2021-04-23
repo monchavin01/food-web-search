@@ -15,8 +15,6 @@ class _AddDataInDBState extends State<AddDataInDB> {
   TextEditingController methodController = TextEditingController();
   TextEditingController imageURLController = TextEditingController();
 
-  var _chosenValue;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -57,9 +55,27 @@ class _AddDataInDBState extends State<AddDataInDB> {
                   },
                   controller: nameController,
                   decoration: InputDecoration(
-                    labelText: 'อาการเสีย',
+                    labelText: 'ชื่ออาหาร',
                     border: OutlineInputBorder(),
-                    hintText: 'อาการเสีย',
+                    hintText: 'ชื่ออาหาร',
+                  ),
+                  maxLines: null,
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: TextFormField(
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter some text';
+                    }
+                    return null;
+                  },
+                  controller: imageURLController,
+                  decoration: InputDecoration(
+                    labelText: 'ลิงค์รูปภาพ',
+                    border: OutlineInputBorder(),
+                    hintText: 'ลิงค์รูปภาพ',
                   ),
                   maxLines: null,
                 ),
@@ -75,9 +91,9 @@ class _AddDataInDBState extends State<AddDataInDB> {
                   },
                   controller: descriptionController,
                   decoration: InputDecoration(
-                    labelText: 'สาเหตุ',
+                    labelText: 'วัตถุดิบ',
                     border: OutlineInputBorder(),
-                    hintText: 'สาเหตุ',
+                    hintText: 'วัตถุดิบ',
                   ),
                   maxLines: null,
                 ),
@@ -93,9 +109,9 @@ class _AddDataInDBState extends State<AddDataInDB> {
                   },
                   controller: methodController,
                   decoration: InputDecoration(
-                    labelText: 'วิธีแก้',
+                    labelText: 'วิธีการปรุง',
                     border: OutlineInputBorder(),
-                    hintText: 'วิธีแก้',
+                    hintText: 'วิธีการปรุง',
                   ),
                   maxLines: null,
                 ),
@@ -144,10 +160,11 @@ class _AddDataInDBState extends State<AddDataInDB> {
 
   void _onPressed(BuildContext context) {
     test();
-    firestoreInstance.collection("computer-repair").add({
+    firestoreInstance.collection("food").add({
       "searchKey": resultFormatKey,
       "name": nameController.text,
-      "description": descriptionController.text,
+      "image": imageURLController.text,
+      "description": descriptionController.text, //วัตถุดิบ
       "method": methodController.text,
     }).then((value) {
       _showMyDialog(context);

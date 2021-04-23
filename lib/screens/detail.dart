@@ -19,12 +19,30 @@ class Detail extends StatelessWidget {
                 width: Get.width * 0.5,
                 child: Column(
                   children: [
+                    data['image'] != ""
+                        ? ClipRRect(
+                            borderRadius: BorderRadius.circular(100),
+                            child: Image.network(
+                              data['image'],
+                              fit: BoxFit.cover,
+                            ),
+                          )
+                        : Container(
+                            height: Get.height * 0.2,
+                            width: Get.height * 0.2,
+                            child: Text(
+                              'ไม่มีรูปภาพ',
+                              style: TextStyle(fontSize: 36),
+                            ),
+                          ),
+                    SizedBox(height: 16),
                     data['description'] != ""
-                        ? _buildLayoutDescription(data['description'], 'สาเหตุ')
+                        ? _buildLayoutDescription(
+                            data['description'], 'วัตถุดิบ')
                         : Container(),
                     SizedBox(height: 16),
                     data['method'] != ""
-                        ? _buildLayoutDescription(data['method'], 'วิธีแก้ไข')
+                        ? _buildLayoutDescription(data['method'], 'วิธีการปรุง')
                         : _buildLayoutDescription('ไม่มีคำอธิบาย', '')
                   ],
                 ),

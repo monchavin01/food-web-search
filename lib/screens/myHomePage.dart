@@ -62,26 +62,12 @@ class _MyHomePageState extends State<MyHomePage> {
       child: Container(
         width: Get.width * 0.6,
         child: Card(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(32),
-          ),
           child: TextField(
             controller: _controller,
             decoration: InputDecoration(
-                suffixIcon: _controller.text != "" || resultSearch != ""
-                    ? MouseRegion(
-                        cursor: SystemMouseCursors.click,
-                        child: GestureDetector(
-                          child: Icon(Icons.cancel),
-                          onTap: () {
-                            _controller.clear();
-                            resultSearch = "";
-                          },
-                        ),
-                      )
-                    : null,
+                suffixIcon: Icon(Icons.search),
                 border: InputBorder.none,
-                prefixIcon: Icon(Icons.search),
+                contentPadding: EdgeInsets.all(16),
                 hintText: 'Search...'),
             onChanged: (val) {
               setState(() {
@@ -119,7 +105,7 @@ class _MyHomePageState extends State<MyHomePage> {
       width: Get.width * 0.6,
       child: StreamBuilder<QuerySnapshot>(
         stream: FirebaseFirestore.instance
-            .collection("computer-repair")
+            .collection("food")
             .where("searchKey", arrayContains: resultSearch)
             .snapshots(),
         builder: (context, snapshot) {
